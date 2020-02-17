@@ -1,0 +1,8 @@
+request:
+  headers:
+    Content-Type: application/json
+  method: POST
+  url: /organs/login     
+  json:
+    user: $user
+    password: $password

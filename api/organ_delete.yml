@@ -1,0 +1,7 @@
+request:
+  headers:
+    Content-Type: application/json
+  method: DELETE
+  url: /organs/$id    
+validate:
+  - eq: ["content.code", 200]
