@@ -23,7 +23,7 @@ class DataInteg:
     @classmethod
     def genHtml(self):
         file_lst = []
-        for filename in os.listdir(absdir):  
+        for filename in os.listdir(absdir + '/' + 'reports'):
             if 'html' in filename:
                 file_lst.append(filename)
                 dir_name = filename.split('T')[0]
