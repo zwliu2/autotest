@@ -1,6 +1,6 @@
 - config:
     name: 成功创建机构并登陆
-    base_url: https://conversion-api-test.gugud.com/enroll
+    base_url: ${ENV(ENROLL_URL)}
     teardown_hooks:
         - ${hook_print(teardown)}
         
