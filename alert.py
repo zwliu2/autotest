@@ -40,7 +40,7 @@ class SendAlert:
         base_url = 'https://zwinstall.gugud.com/{}/'.format(tag)
         report_url = ''
         for x in file_lst:
-            report_url = base_url + x['T'][0] + '/' + x + "   " + report_url
+            report_url = base_url + x.split('T')[0] + '/' + x + "   " + report_url
         headers = {'Content-Type': 'application/json;charset=utf-8'}
         send_data = {
             "msgtype": "markdown",
@@ -60,3 +60,5 @@ class SendAlert:
 
         if result['errcode'] != 0:
             print('notify dingtalk error: %s' % result['errcode'])
+
+DataInteg.genHtml()
