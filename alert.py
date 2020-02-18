@@ -48,7 +48,7 @@ class SendAlert:
                 "title": "auto-test",
                 "text": "#### API Test \n" +
                     "> project Name: {}\n\n".format(project_name) +
-                    "> api interface url: {}".format(os.getenv('API_URL')) + 
+                    "> api interface url: {}\n\n".format(os.getenv('API_URL')) + 
                     "> gitlab url: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
                     "> report url {}\n\n".format(report_url)
             }
@@ -60,5 +60,3 @@ class SendAlert:
 
         if result['errcode'] != 0:
             print('notify dingtalk error: %s' % result['errcode'])
-
-DataInteg.genHtml()
