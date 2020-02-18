@@ -1,9 +1,12 @@
 import requests
 import json, subprocess
+import os
 
 access_token = 'd54fd978ea84b3e43654bdff63e63213d8ba24c70eaaee013cacfcb5071d37d8'
 project_name = 'meeting'
 tag = 'p0001-meeting'
+absdir = os.path.abspath(os.path.dirname(__file__))
+
 
 class ConnRemoteHost:
     
@@ -18,19 +21,26 @@ class ConnRemoteHost:
 class DataInteg:
 
     @classmethod
-    def genHtml(self, data):
-        filename = data['name']
-        dir_name = data['name'].split('T')[0]
-        command_lst = []
-        command_lst.append("ssh runner@123.56.165.90 mkdir -p /files/data/zwinstall/{}/{}".format(tag, dir_name))
-        command_lst.append("scp {} runner@123.56.165.90:{}".format(filename, '/files/data/zwinstall/{}/{}'.format(tag, dir_name)))
-        ConnRemoteHost().toHost(command_lst)
+    def genHtml(self):
+        file_lst = []
+        for filename in os.listdir(absdir):  
+            if 'html' in file:
+                file_lst.append(file)
+                dir_name = data['name'].split('T')[0]
+                command_lst = []
+                command_lst.append("ssh runner@123.56.165.90 mkdir -p /files/data/zwinstall/{}/{}".format(tag, dir_name))
+                command_lst.append("scp {} runner@123.56.165.90:{}".format(filename, '/files/data/zwinstall/{}/{}'.format(tag, dir_name)))
+                ConnRemoteHost().toHost(command_lst)
 
-        SendAlert().send_alert(data)
+        SendAlert().send_alert(file_lst)
 
 class SendAlert:
     
-    def send_alert(self, data):
+    def send_alert(self, file_lst):
+        base_url = 'https://zwinstall.gugud.com/{}/'.format(tag)
+        report_url = ''
+        for x in file_lst:
+            report_url = base_url + x['T'][0] + '/' + x + "   " + report_url
         headers = {'Content-Type': 'application/json;charset=utf-8'}
         send_data = {
             "msgtype": "markdown",
@@ -38,8 +48,9 @@ class SendAlert:
                 "title": "auto-test",
                 "text": "#### API Test \n" +
                     "> project Name: {}\n\n".format(project_name) +
-                    "> api url: {}\n\n".format('xxxxx') +
-                    "> report url {}\n\n".format('https://zwinstall.gugud.com/{}/{}/{}'.format(tag, data['name'].split('T')[0], data['name']))
+                    "> api interface url: {}".format(os.getenv('API_URL')) + 
+                    "> gitlab url: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
+                    "> report url {}\n\n".format(report_url)
             }
         }
         print(send_data)
@@ -50,8 +61,4 @@ class SendAlert:
         if result['errcode'] != 0:
             print('notify dingtalk error: %s' % result['errcode'])
 
-
-data = {
-    'name': '20200218T085952.377442.html'
-}
-# DataInteg.genHtml(data) 场景测试执行完后调用此方法
+DataInteg.genHtml()
