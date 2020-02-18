@@ -9,7 +9,12 @@ https://docs.httprunner.org/prepare/testcase-structure/
 pip install httprunner
 ```
 
-### 运行
+### 测试单个场景
 ```
 hrun testcases/create_ok.yaml
+```
+
+### 测试所有场景
+```
+hrun testcases
 ```
