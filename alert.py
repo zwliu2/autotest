@@ -47,10 +47,10 @@ class SendAlert:
             "markdown": {
                 "title": "auto-test",
                 "text": "#### API Test \n" +
-                    "> project Name: {}\n\n".format(project_name) +
-                    "> api interface url: {}\n\n".format(os.getenv('API_URL')) + 
-                    "> gitlab url: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
-                    "> report url {}\n\n".format(report_url)
+                    "> 项目名: {}\n\n".format(project_name) +
+                    "> 接口访问地址: {}\n\n".format(os.getenv('API_URL')) + 
+                    "> 接口仓库地址: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
+                    "> 测试报告地址: {}\n\n".format(report_url)
             }
         }
         url = 'https://oapi.dingtalk.com/robot/send?access_token={}'.format(access_token)
