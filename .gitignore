@@ -1,0 +1,7 @@
+.env
+locustfile.py
+
+reports/*
+logs/*
+__pycache__/*
+
