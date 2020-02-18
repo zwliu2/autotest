@@ -3,7 +3,7 @@ import json, subprocess
 import os
 
 access_token = 'd54fd978ea84b3e43654bdff63e63213d8ba24c70eaaee013cacfcb5071d37d8'
-project_name = 'meeting'
+project_name = '会议系统meeting'
 tag = 'p0001-meeting'
 absdir = os.path.abspath(os.path.dirname(__file__))
 
