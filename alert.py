@@ -29,7 +29,7 @@ class DataInteg:
                 dir_name = filename.split('T')[0]
                 command_lst = []
                 command_lst.append("ssh runner@123.56.165.90 mkdir -p /files/data/zwinstall/{}/{}".format(tag, dir_name))
-                command_lst.append("scp {} runner@123.56.165.90:{}".format(filename, '/files/data/zwinstall/{}/{}'.format(tag, dir_name)))
+                command_lst.append("scp reports/{} runner@123.56.165.90:{}".format(filename, '/files/data/zwinstall/{}/{}'.format(tag, dir_name)))
                 ConnRemoteHost().toHost(command_lst)
 
         SendAlert().send_alert(file_lst)
