@@ -20,4 +20,4 @@ def hook_print(any):
     print(any)
 
 if __name__ == '__main__':
-    hook_print("It's working.")
+    gen_mobile()
