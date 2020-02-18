@@ -26,7 +26,7 @@ class DataInteg:
         for filename in os.listdir(absdir):  
             if 'html' in filename:
                 file_lst.append(filename)
-                dir_name = data['name'].split('T')[0]
+                dir_name = filename.split('T')[0]
                 command_lst = []
                 command_lst.append("ssh runner@123.56.165.90 mkdir -p /files/data/zwinstall/{}/{}".format(tag, dir_name))
                 command_lst.append("scp {} runner@123.56.165.90:{}".format(filename, '/files/data/zwinstall/{}/{}'.format(tag, dir_name)))
