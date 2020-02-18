@@ -60,5 +60,3 @@ class SendAlert:
 
         if result['errcode'] != 0:
             print('notify dingtalk error: %s' % result['errcode'])
-
-DataInteg.genHtml()
