@@ -53,7 +53,6 @@ class SendAlert:
                     "> report url {}\n\n".format(report_url)
             }
         }
-        print(send_data)
         url = 'https://oapi.dingtalk.com/robot/send?access_token={}'.format(access_token)
         req = requests.post(url=url, data=json.dumps(send_data).encode('utf-8'), headers=headers)
         result = req.json()
