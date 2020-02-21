@@ -3,7 +3,7 @@ import json, subprocess
 import os
 
 access_token = 'd54fd978ea84b3e43654bdff63e63213d8ba24c70eaaee013cacfcb5071d37d8'
-project_name = 'meeting'
+project_name = '会议系统meeting'
 tag = 'p0001-meeting'
 absdir = os.path.abspath(os.path.dirname(__file__))
 
@@ -45,8 +45,8 @@ class SendAlert:
         send_data = {
             "msgtype": "markdown",
             "markdown": {
-                "title": "auto-test",
-                "text": "#### API Test \n" +
+                "title": "会议系统",
+                "text": "#### API 自动化测试结果 \n" +
                     "> 项目名: {}\n\n".format(project_name) +
                     "> 接口访问地址: {}\n\n".format(os.getenv('API_URL')) + 
                     "> 接口仓库地址: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +

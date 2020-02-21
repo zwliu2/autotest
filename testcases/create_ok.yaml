@@ -1,0 +1,38 @@
+- config:
+    name: 成功创建机构并登陆
+    base_url: ${ENV(ENROLL_URL)}
+    teardown_hooks:
+        - ${hook_print(teardown)}
+        
+- test:
+    name: 【准备】创建机构
+    api: api/organ_create.yml
+    extract:
+        - user: content.data.phone
+        - password: content.data.password
+        - id: content.data.id
+
+- test:
+    name: 登陆机构账号
+    api: api/organ_login.yml
+    variables:
+        - user: $user
+        - password: $password
+    validate:
+        - eq: ["content.code", 200]
+
+- test:
+    name: 删除机构账号
+    api: api/organ_delete.yml
+    variables:
+        - id: $id
+
+- test:
+    name: 被删除的机构账号不能登录
+    api: api/organ_login.yml
+    variables:
+        - user: $user
+        - password: $password
+    validate:
+        - eq: ["content.code", 400]
+    
