@@ -1,8 +1,8 @@
 - config:
-    name: 成功创建会议
+    name: 创建会议
     base_url: ${ENV(ENROLL_URL)}
-    teardown_hooks:
-        - ${hook_print(teardown)}
+    # teardown_hooks:
+    #     - ${hook_print(teardown)}
 
 - test:
     name: 创建机构
