@@ -1,0 +1,11 @@
+request:
+  headers:
+    Content-Type: application/json
+  method: POST
+  url: /organs     
+  json:
+    phone: ${gen_mobile()}
+    name: ${gen_name()}
+    contact: ${gen_contact()}
+validate:
+  - eq: ["content.code", 200]
