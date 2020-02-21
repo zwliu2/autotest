@@ -1,0 +1,9 @@
+config:
+  name: 会议管理
+
+testcases:
+  create_meeting:
+    testcase: testcases/create_meeting_ok.yml
+    parameters:
+      name: ["2020企业家雁栖湖论坛"]
+

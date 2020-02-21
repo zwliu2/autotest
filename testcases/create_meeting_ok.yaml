@@ -1,0 +1,60 @@
+- config:
+    name: 成功创建会议
+    base_url: ${ENV(ENROLL_URL)}
+    teardown_hooks:
+        - ${hook_print(teardown)}
+
+- test:
+    name: 创建机构
+    api: api/organ/create.yml
+    extract:
+        - organ_id: content.data.id
+
+- test:
+    name: 创建【发布中】的会议
+    api: api/meeting/create.yml
+    variables:
+        - creator_id: $organ_id
+        - expected_state: "ongoing"
+        - name: ${gen_name()}
+    extract:
+        - ongoing_meeting_id: content.data.id
+
+- test:
+    name: 查询创建的会议
+    api: api/meeting/get_by_id.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+    validate:
+        - eq: ["status_code", 200]
+
+- test:
+    name: 删除【发布中】状态的会议
+    api: api/meeting/delete.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+        - expected_status_code: 400
+
+- test:
+    name: 创建缺少【标题】的会议
+    api: api/meeting/create.yml
+    variables:
+        - creator_id: $organ_id
+        - name: ""
+        - expected_status_code: 412
+
+- test:
+    name: 创建【草稿】状态会议
+    api: api/meeting/create.yml
+    variables:
+        - creator_id: $organ_id
+        - expected_state: "draft"
+        - name: ${gen_name()}
+    extract:
+        - draft_meeting_id: content.data.id
+
+- test:
+    name: 删除【草稿】状态会议
+    api: api/meeting/delete.yml
+    variables:
+        - meeting_id: $draft_meeting_id

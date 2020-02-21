@@ -1,0 +1,34 @@
+name: 创建会议
+base_url: ${ENV(ENROLL_URL)}
+variables:
+    expected_status_code: 200
+    expected_state: "ongoing"
+request:
+  headers:
+    Content-Type: application/json
+  method: POST
+  url: /meetings     
+  json:
+    name: $name
+    bill_img: "http://127.0.0.1:8080/imahs/jsk.jpg"
+    meeting_start: "2020-02-20 12:00:00"
+    meeting_end: "2020-02-20 12:00:00"
+    enroll_start: "2020-02-20 12:00:00"
+    enroll_end: "2020-02-20 12:00:00"
+    address: "成都市凯宾斯基大酒店国宴厅"
+    fee_amount: 500
+    fee_descr: "书本费"
+    fee_payway: "online"
+    bank_name: "工商银行四川分行"
+    bank_account: "62010101010011001"
+    bank_name: "软创互联"
+    organizer: "软创互联科技有限公司"
+    co_organizer: "知一软件"
+    claim: "爱国，无不良记录"
+    scale: 400
+    contacter: [{"name":"陈聪", "phone": "13281896013"}]
+    workflow: "direct"
+    state: $expected_state
+    creator_id: $creator_id
+validate:
+    - eq: ["content.code", $expected_status_code]

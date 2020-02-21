@@ -5,8 +5,8 @@
         - ${hook_print(teardown)}
         
 - test:
-    name: 【准备】创建机构
-    api: api/organ_create.yml
+    name: 创建机构
+    api: api/organ/create.yml
     extract:
         - user: content.data.phone
         - password: content.data.password
@@ -14,7 +14,7 @@
 
 - test:
     name: 登陆机构账号
-    api: api/organ_login.yml
+    api: api/organ/login.yml
     variables:
         - user: $user
         - password: $password
@@ -23,13 +23,13 @@
 
 - test:
     name: 删除机构账号
-    api: api/organ_delete.yml
+    api: api/organ/delete.yml
     variables:
         - id: $id
 
 - test:
     name: 被删除的机构账号不能登录
-    api: api/organ_login.yml
+    api: api/organ/login.yml
     variables:
         - user: $user
         - password: $password

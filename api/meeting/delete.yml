@@ -1,0 +1,12 @@
+name: 删除会议
+base_url: ${ENV(ENROLL_URL)}
+variables:
+    expected_status_code: 200
+    meeting_id: 0000
+request:
+  headers:
+    Content-Type: application/json
+  method: DELETE
+  url: /meetings/$meeting_id
+validate:
+    - eq: ["content.code", $expected_status_code]

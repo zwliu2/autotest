@@ -4,12 +4,12 @@ import alert
 from alert import DataInteg
 def gen_name():
     val = random.randint(0x4e00, 0x9fbf)
-    return chr(val)
+    return "TEST"+chr(val)+chr(val)
 
 
 def gen_contact():
     val = random.randint(0x4e00, 0x9fbf)
-    return chr(val)
+    return "TEST"+chr(val)
 
 
 def gen_mobile():
