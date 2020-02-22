@@ -47,7 +47,7 @@ class SendAlert:
             "msgtype": "markdown",
             "markdown": {
                 "title": "会议系统",
-                "text": "#### API自动化测试+"+Util.result_str(summary['success'])+"+ \n" +
+                "text": "#### API自动化测试【"+Util.result_str(summary['success'])+"】 \n" +
                     "> 项目名: {}\n\n".format(project_name) +
                     "> 接口访问地址: {}\n\n".format(os.getenv('API_URL')) + 
                     "> 接口仓库地址: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
