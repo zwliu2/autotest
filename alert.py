@@ -57,10 +57,7 @@ class SendAlert:
         send_data = {
             "msgtype": "text",
             "text": {
-                "content": 
-                    "==========================\n"+ 
-                    Util.result_str(summary['success'])+" \n" +
-                    "==========================\n"+
+                "content": Util.result_str(summary['success'])+
                     "项目名: {}\n\n".format(project_name) +
                     "接口访问地址: {}\n".format(os.getenv('API_URL')) + 
                     "接口仓库地址: {}\n".format(os.getenv('CI_PROJECT_URL')) +
@@ -79,6 +76,8 @@ class Util:
     
     def result_str(result):
         if(result):
-            return  "！！【通过】 API自动化测试！！"
+            return  "【通过】 API自动化测试"
         else:
-            return  "！！【失败】 API自动化测试！！"
+            return  "==========================\n"+ 
+                    "！！【失败】 API自动化测试！！"+
+                    "==========================\n"
