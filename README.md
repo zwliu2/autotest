@@ -17,4 +17,6 @@ hrun testcases/create_ok.yaml
 ### 测试所有场景
 ```
 hrun testcases
+或者
+hrun testsuites
 ```
