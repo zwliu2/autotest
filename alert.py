@@ -43,15 +43,28 @@ class SendAlert:
             report_url = base_url + x.split('T')[0] + '/' + x + "   " + report_url
         headers = {'Content-Type': 'application/json;charset=utf-8'}
 
+        # send_data = {
+        #     "msgtype": "markdown",
+        #     "markdown": {
+        #         "title": "会议系统",
+        #         "text": "#### API自动化测试【"+Util.result_str(summary['success'])+"】 \n" +
+        #             "> 项目名: {}\n\n".format(project_name) +
+        #             "> 接口访问地址: {}\n\n".format(os.getenv('API_URL')) + 
+        #             "> 接口仓库地址: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
+        #             "> 测试报告地址: {}\n\n".format(report_url)
+        #     }
+        # }
         send_data = {
-            "msgtype": "markdown",
-            "markdown": {
-                "title": "会议系统",
-                "text": "#### API自动化测试【"+Util.result_str(summary['success'])+"】 \n" +
-                    "> 项目名: {}\n\n".format(project_name) +
-                    "> 接口访问地址: {}\n\n".format(os.getenv('API_URL')) + 
-                    "> 接口仓库地址: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
-                    "> 测试报告地址: {}\n\n".format(report_url)
+            "msgtype": "text",
+            "text": {
+                "content": 
+                    "==========================\n"+ 
+                    Util.result_str(summary['success'])+" \n" +
+                    "==========================\n"+
+                    "项目名: {}\n\n".format(project_name) +
+                    "接口访问地址: {}\n".format(os.getenv('API_URL')) + 
+                    "接口仓库地址: {}\n".format(os.getenv('CI_PROJECT_URL')) +
+                    "测试报告地址: {}\n".format(report_url)
             }
         }
         url = 'https://oapi.dingtalk.com/robot/send?access_token={}'.format(access_token)
@@ -66,6 +79,6 @@ class Util:
     
     def result_str(result):
         if(result):
-            return "通过"
+            return  "！！【通过】 API自动化测试！！"
         else:
-            return "失败"
+            return  "！！【失败】 API自动化测试！！"
