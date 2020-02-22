@@ -11,16 +11,23 @@
         - ongoing_meeting_id
 
 - test:
-    name: 【ONGOING-001】取消【发布中】状态的会议
+    name: 【ONGOING-001】开启【已暂停】状态的会议报名通道
     api: api/meeting/ongoing.yml
     variables:
         - meeting_id: $ongoing_meeting_id
 
 - test:
-    name: 【ONGOING-001】查看是否取消状态变更为ongoing
+    name: 【ONGOING-001】查看会议状态是否变更为ongoing
     api: api/meeting/get_by_id.yml
     variables:
         - meeting_id: $ongoing_meeting_id
         - expected_status_code: 200
     validate:
         - eq: ["content.data.state", "ongoing"]
+
+- test:
+    name: 【ONGOING-002】开启【非暂停中】状态的会议报名通道
+    api: api/meeting/ongoing.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+        - expected_status_code: 400

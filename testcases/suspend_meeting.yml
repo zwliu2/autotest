@@ -24,3 +24,10 @@
         - expected_status_code: 200
     validate:
         - eq: ["content.data.state", "suspend"]
+
+- test:
+    name: 【SUSPEND-002】暂停【非发布中】状态的会议报名通道
+    api: api/meeting/suspend.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+        - expected_status_code: 400
