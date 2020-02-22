@@ -19,7 +19,7 @@ def gen_mobile():
 
 def hook_print(any):
     print(any)
-    DataInteg.genHtml()
+    # DataInteg.genHtml()
 
 if __name__ == '__main__':
     gen_mobile()

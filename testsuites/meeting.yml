@@ -2,8 +2,15 @@ config:
   name: 会议管理
 
 testcases:
-  create_meeting:
-    testcase: testcases/create_meeting_ok.yml
-    parameters:
-      name: ["2020企业家雁栖湖论坛"]
-
+  【场景】发布会议:
+    testcase: testcases/create_meeting.yml
+  【场景】编辑会议:
+    testcase: testcases/edit_meeting.yml
+  【场景】删除会议:
+    testcase: testcases/delete_meeting.yml
+  【场景】暂停会议报名通道:
+    testcase: testcases/suspend_meeting.yml
+  【场景】开启会议报名通道:
+    testcase: testcases/ongoing_meeting.yml
+  【场景】取消会议:
+    testcase: testcases/cancel_meeting.yml
