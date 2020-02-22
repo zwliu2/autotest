@@ -21,7 +21,7 @@ class ConnRemoteHost:
 class DataInteg:
 
     @classmethod
-    def genHtml(self):
+    def genHtml(self, summary):
         file_lst = []
         for filename in os.listdir(absdir + '/' + 'reports'):
             if 'html' in filename:
@@ -32,21 +32,22 @@ class DataInteg:
                 command_lst.append("scp reports/{} runner@123.56.165.90:{}".format(filename, '/files/data/zwinstall/{}/{}'.format(tag, dir_name)))
                 ConnRemoteHost().toHost(command_lst)
 
-        SendAlert().send_alert(file_lst)
+        SendAlert().send_alert(file_lst, summary)
 
 class SendAlert:
     
-    def send_alert(self, file_lst):
+    def send_alert(self, file_lst, summary):
         base_url = 'https://zwinstall.gugud.com/{}/'.format(tag)
         report_url = ''
         for x in file_lst:
             report_url = base_url + x.split('T')[0] + '/' + x + "   " + report_url
         headers = {'Content-Type': 'application/json;charset=utf-8'}
+
         send_data = {
             "msgtype": "markdown",
             "markdown": {
                 "title": "会议系统",
-                "text": "#### API 自动化测试结果 \n" +
+                "text": "#### API自动化测试+"+Util.result_str(summary['success'])+"+ \n" +
                     "> 项目名: {}\n\n".format(project_name) +
                     "> 接口访问地址: {}\n\n".format(os.getenv('API_URL')) + 
                     "> 接口仓库地址: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
@@ -59,3 +60,12 @@ class SendAlert:
 
         if result['errcode'] != 0:
             print('notify dingtalk error: %s' % result['errcode'])
+
+    
+class Util:
+    
+    def result_str(result):
+        if(result):
+            return "通过"
+        else:
+            return "失败"

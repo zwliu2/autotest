@@ -1,7 +1,6 @@
 import os
 import random
 import alert
-from alert import DataInteg
 def gen_name():
     val = random.randint(0x4e00, 0x9fbf)
     return "TEST"+chr(val)+chr(val)
@@ -19,7 +18,6 @@ def gen_mobile():
 
 def hook_print(any):
     print(any)
-    DataInteg.genHtml()
-
+    
 if __name__ == '__main__':
     gen_mobile()
