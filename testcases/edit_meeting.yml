@@ -1,0 +1,45 @@
+- config:
+    name: 【Meeting】编辑会议
+    base_url: ${ENV(ENROLL_URL)}
+    # teardown_hooks:
+    #     - ${hook_print(teardown)}
+
+- test:
+    name: 【前置条件】准备【发布中】【草稿】状态会议数据
+    testcase: testcases/create_meeting.yml
+    output:
+        - ongoing_meeting_id
+        - draft_meeting_id
+
+- test:
+    name: 【EDIT-001】发布【草稿】状态的会议
+    api: api/meeting/edit.yml
+    variables:
+        - meeting_id: $draft_meeting_id
+        - expected_status_code: 200
+
+- test:
+    name: 【EDIT-001】检查会议是否发布成功
+    api: api/meeting/get_by_id.yml
+    variables:
+        - meeting_id: $draft_meeting_id
+        - expected_status_code: 200
+    validate:
+        - eq: ["content.data.state", "ongoing"]
+
+- test:
+    name: 【EDIT-002】编辑【发布中】状态的会议名称
+    api: api/meeting/edit.yml
+    variables:
+        - expected_name: "TEST-新会议"
+        - meeting_id: $ongoing_meeting_id
+        - expected_status_code: 200
+
+- test:
+    name: 【EDIT-002】检查会议是否编辑成功
+    api: api/meeting/get_by_id.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+        - expected_status_code: 200
+    validate:
+        - eq: ["content.data.name", "TEST-新会议"]

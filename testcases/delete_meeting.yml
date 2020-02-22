@@ -1,0 +1,26 @@
+- config:
+    name: 【Meeting】删除会议
+    base_url: ${ENV(ENROLL_URL)}
+    # teardown_hooks:
+    #     - ${hook_print(teardown)}
+
+- test:
+    name: 【前置条件】准备【发布中】【草稿】状态会议数据
+    testcase: testcases/create_meeting.yml
+    output:
+        - ongoing_meeting_id
+        - draft_meeting_id
+
+- test:
+    name: 【DELETE-001】删除【发布中】状态的会议
+    api: api/meeting/delete.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+        - expected_status_code: 400
+
+- test:
+    name: 【DELETE-002】删除【草稿】状态会议
+    api: api/meeting/delete.yml
+    variables:
+        - meeting_id: $draft_meeting_id
+        - expected_status_code: 200

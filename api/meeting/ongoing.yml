@@ -1,0 +1,15 @@
+name: 取消会议
+base_url: ${ENV(ENROLL_URL)}
+variables:
+    expected_status_code: 200
+    expected_state: "ongoing"
+    meeting_id: 1000
+request:
+  headers:
+    Content-Type: application/json
+  method: PUT
+  url: /meetings/$meeting_id  
+  json:
+    state: "ongoing"
+validate:
+    - eq: ["content.code", $expected_status_code]

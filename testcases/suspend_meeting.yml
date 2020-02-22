@@ -1,0 +1,26 @@
+- config:
+    name: 【Meeting】暂停会议报名
+    base_url: ${ENV(ENROLL_URL)}
+    # teardown_hooks:
+    #     - ${hook_print(teardown)}
+
+- test:
+    name: 【前置条件】准备【发布中】状态会议数据
+    testcase: testcases/create_meeting.yml
+    output:
+        - ongoing_meeting_id
+
+- test:
+    name: 【SUSPEND-001】暂停【发布中】状态的会议报名
+    api: api/meeting/suspend.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+
+- test:
+    name: 【SUSPEND-001】查看会议状态是否变更为suspend
+    api: api/meeting/get_by_id.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+        - expected_status_code: 200
+    validate:
+        - eq: ["content.data.state", "suspend"]

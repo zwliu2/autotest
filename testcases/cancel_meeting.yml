@@ -1,0 +1,26 @@
+- config:
+    name: 【Meeting】取消会议
+    base_url: ${ENV(ENROLL_URL)}
+    teardown_hooks:
+        - ${hook_print(teardown)}
+
+- test:
+    name: 【前置条件】准备【发布中】状态会议数据
+    testcase: testcases/create_meeting.yml
+    output:
+        - ongoing_meeting_id
+
+- test:
+    name: 【CANCEL-001】取消【发布中】状态的会议
+    api: api/meeting/cancel.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+
+- test:
+    name: 【CANCEL-001】查看是否取消状态变更为cancel
+    api: api/meeting/get_by_id.yml
+    variables:
+        - meeting_id: $ongoing_meeting_id
+        - expected_status_code: 200
+    validate:
+        - eq: ["content.data.state", "cancel"]
