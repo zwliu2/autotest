@@ -1,3 +1,4 @@
+# encoding: utf-8
 from httprunner.api import HttpRunner
 from httprunner.report import gen_html_report
 from alert import DataInteg
