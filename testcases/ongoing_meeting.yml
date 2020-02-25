@@ -25,9 +25,9 @@
     validate:
         - eq: ["content.data.state", "ongoing"]
 
-- test:
-    name: 【ONGOING-002】开启【非暂停中】状态的会议报名通道
-    api: api/meeting/ongoing.yml
-    variables:
-        - meeting_id: $ongoing_meeting_id
-        - expected_status_code: 400
+# - test:
+#     name: 【ONGOING-002】开启【非暂停中】状态的会议报名通道
+#     api: api/meeting/ongoing.yml
+#     variables:
+#         - meeting_id: $ongoing_meeting_id
+#         - expected_status_code: 400
