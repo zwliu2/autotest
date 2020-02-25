@@ -8,8 +8,6 @@ request:
   headers:
     Content-Type: application/json
   method: PUT
-  url: /meetings/$meeting_id  
-  json:
-    state: "cancel"
+  url: /meetings/$meeting_id/cancel
 validate:
     - eq: ["content.code", $expected_status_code]
