@@ -18,7 +18,7 @@ def clean_data():
     cur = conn.cursor() #创建指针对象   
     #删除数据
     cur.execute("DELETE FROM meetings WHERE name LIKE %s",('AUTOTEST_%',))
-    cur.execute("DELETE FROM organs WHERE name LIKE %s",('190%',))
+    cur.execute("DELETE FROM organs WHERE phone LIKE %s",('190%',))
     # 关闭连接
     conn.commit()
     cur.close()
