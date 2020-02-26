@@ -3,5 +3,3 @@ locustfile.py
 reports/*
 logs/*
 __pycache__/*
-
-.env
