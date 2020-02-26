@@ -31,7 +31,7 @@
     name: 【EDIT-002】编辑【发布中】状态的会议名称
     api: api/meeting/edit.yml
     variables:
-        - expected_name: "TEST-新会议"
+        - expected_name: "AUTOTEST_新会议"
         - meeting_id: $ongoing_meeting_id
         - expected_status_code: 200
 
@@ -42,4 +42,4 @@
         - meeting_id: $ongoing_meeting_id
         - expected_status_code: 200
     validate:
-        - eq: ["content.data.name", "TEST-新会议"]
+        - eq: ["content.data.name", "AUTOTEST_新会议"]

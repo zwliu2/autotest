@@ -10,7 +10,7 @@ request:
   url: /meetings     
   json:
     name: $name
-    bill_img: "http://127.0.0.1:8080/imahs/jsk.jpg"
+    bill_img: ""
     meeting_start: "2020-02-20 12:00:00"
     meeting_end: "2020-02-20 12:00:00"
     enroll_start: "2020-02-20 12:00:00"
