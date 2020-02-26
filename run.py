@@ -15,12 +15,10 @@ def clean_data():
  
     #创建连接对象
     conn = psycopg2.connect(database=db, user=user, password=passwd, host=host, port=port)
-    cur = conn.cursor() #创建指针对象
- 
+    cur = conn.cursor() #创建指针对象   
     #删除数据
     cur.execute("DELETE FROM meetings WHERE name LIKE %s",('AUTOTEST_%',))
     cur.execute("DELETE FROM organs WHERE name LIKE %s",('190%',))
- 
     # 关闭连接
     conn.commit()
     cur.close()
