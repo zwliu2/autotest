@@ -1,8 +1,8 @@
 - config:
     name: 成功创建机构并登陆
     base_url: ${ENV(ENROLL_URL)}
-    teardown_hooks:
-        - ${hook_print(teardown)}
+    # teardown_hooks:
+    #     - ${clean_data()}
         
 - test:
     name: 【准备】创建机构

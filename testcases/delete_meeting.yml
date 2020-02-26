@@ -2,7 +2,7 @@
     name: 【Meeting】删除会议
     base_url: ${ENV(ENROLL_URL)}
     # teardown_hooks:
-    #     - ${hook_print(teardown)}
+    #     - ${clean_data()}
 
 - test:
     name: 【前置条件】准备【发布中】【草稿】状态会议数据

@@ -2,7 +2,7 @@
     name: 【Meeting】开启会议报名通道
     base_url: ${ENV(ENROLL_URL)}
     # teardown_hooks:
-    #     - ${hook_print(teardown)}
+    #     - ${clean_data()}
 
 - test:
     name: 【前置条件】准备【已暂停】状态会议数据

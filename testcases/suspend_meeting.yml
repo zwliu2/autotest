@@ -2,7 +2,7 @@
     name: 【Meeting】暂停会议报名
     base_url: ${ENV(ENROLL_URL)}
     # teardown_hooks:
-    #     - ${hook_print(teardown)}
+    #     - ${clean_data()}
 
 - test:
     name: 【前置条件】准备【发布中】状态会议数据

@@ -1,8 +1,8 @@
 - config:
     name: 【Meeting】取消会议
     base_url: ${ENV(ENROLL_URL)}
-    teardown_hooks:
-        - ${hook_print(teardown)}
+    # teardown_hooks:
+    #     - ${clean_data()}
 
 - test:
     name: 【前置条件】准备【发布中】状态会议数据

@@ -2,7 +2,7 @@
     name: 【Meeting】创建会议
     base_url: ${ENV(ENROLL_URL)}
     # teardown_hooks:
-    #     - ${hook_print(teardown)}
+    #     - ${clean_data()}
     output:
         - ongoing_meeting_id
         - draft_meeting_id
