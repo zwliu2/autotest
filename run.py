@@ -35,5 +35,5 @@ if __name__ == '__main__':
     #清理测试数据
     clean_data()
     #推送钉钉消息
-    DataInteg.genHtml(summary)
+    #DataInteg.genHtml(summary)
     print("End....")
