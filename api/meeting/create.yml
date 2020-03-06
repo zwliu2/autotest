@@ -3,11 +3,15 @@ base_url: ${ENV(ENROLL_URL)}
 variables:
     expected_status_code: 200
     expected_state: "ongoing"
+    meeting_start: "2020-03-06 12:00:00"
+    meeting_end: "2020-03-09 12:00:00"
+    enroll_start: "2020-02-06 12:00:00"
+    enroll_end: "2020-03-06 12:00:00"
 request:
   headers:
     Content-Type: application/json
   method: POST
-  url: /meetings     
+  url: /meetings
   json:
     name: $name
     bill_img: ""
@@ -15,7 +19,7 @@ request:
     meeting_end: $meeting_end
     enroll_start: $enroll_start
     enroll_end: $enroll_end
-    address: "成都市凯宾斯基大酒店国宴厅"
+    address: {"name": "成都市凯宾斯基大酒店国宴厅", "lng": 30.202, "lon": 132.1222}
     fee_amount: 500
     fee_descr: "书本费"
     fee_payway: "online"
