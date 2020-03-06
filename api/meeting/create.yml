@@ -11,17 +11,17 @@ request:
   json:
     name: $name
     bill_img: ""
-    meeting_start: "2020-02-20 12:00:00"
-    meeting_end: "2020-02-20 12:00:00"
-    enroll_start: "2020-02-20 12:00:00"
-    enroll_end: "2020-02-20 12:00:00"
+    meeting_start: $meeting_start
+    meeting_end: $meeting_end
+    enroll_start: $enroll_start
+    enroll_end: $enroll_end
     address: "成都市凯宾斯基大酒店国宴厅"
     fee_amount: 500
     fee_descr: "书本费"
     fee_payway: "online"
     bank_name: "工商银行四川分行"
     bank_account: "62010101010011001"
-    bank_name: "软创互联"
+    bank_user_name: "软创互联"
     organizer: "软创互联科技有限公司"
     co_organizer: "知一软件"
     claim: "爱国，无不良记录"

@@ -4,48 +4,53 @@
     # teardown_hooks:
     #     - ${clean_data()}
     output:
-        - ongoing_meeting_id
-        - draft_meeting_id
+      - ongoing_meeting_id
+      - draft_meeting_id
 
 - test:
     name: 【前置条件】创建机构（动态生成）
     api: api/organ/create.yml
     extract:
-        - organ_id: content.data.id
+      - organ_id: content.data.id
 
 - test:
     name: 【CREATE-001】正常创建会议
     api: api/meeting/create.yml
     variables:
-        - creator_id: $organ_id
-        - expected_state: "ongoing"
-        - name: ${gen_name()}
+      - creator_id: $organ_id
+      - expected_state: "ongoing"
+      - name: ${gen_name()}
+      - meeting_start: ${meeting_start()}
+      - meeting_end: ${meeting_end()}
+      - enroll_start: ${enroll_start()}
+      - enroll_end: ${enroll_end()}
+
     extract:
-        - ongoing_meeting_id: content.data.id
+      - ongoing_meeting_id: content.data.id
 
 - test:
     name: 【CREATE-002】创建缺少【标题】的会议
     api: api/meeting/create.yml
     variables:
-        - creator_id: $organ_id
-        - name: ""
-        - expected_status_code: 412
+      - creator_id: $organ_id
+      - name: ""
+      - expected_status_code: 412
 
 - test:
     name: 【CREATE-003】创建【草稿】状态会议
     api: api/meeting/create.yml
     variables:
-        - creator_id: $organ_id
-        - expected_state: "draft"
-        - name: ${gen_name()}
+      - creator_id: $organ_id
+      - expected_state: "draft"
+      - name: ${gen_name()}
     extract:
-        - draft_meeting_id: content.data.id
+      - draft_meeting_id: content.data.id
 
 - test:
     name: 【CREATE-004】创建不含【标题】的【草稿】状态会议
     api: api/meeting/create.yml
     variables:
-        - creator_id: $organ_id
-        - expected_state: "draft"
-        - expected_status_code: 412
-        - name: ""
+      - creator_id: $organ_id
+      - expected_state: "draft"
+      - expected_status_code: 412
+      - name: ""

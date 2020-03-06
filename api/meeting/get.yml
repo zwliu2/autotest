@@ -1,0 +1,16 @@
+name: 查询会议列表
+base_url: ${ENV(ENROLL_URL)}
+variables:
+    expected_status_code: 200
+
+request:
+  headers:
+    Content-Type: application/json
+  method: get
+  url: /meetings?creator_id=10013
+
+    state: $expected_state
+    creator_id: $creator_id
+validate:
+    - eq: ["content.code", $expected_status_code]
+    - eq: ["content.creator_id", 10013]

@@ -1,0 +1,26 @@
+
+
+
+- test:
+    name: 【look-001】地方管理员登录系统
+    api: api/organ_login.yml
+    variables:
+        - user: "1949496806"
+        - password: "lj19949496806"
+    validate:
+        - eq: ["content.code", 200]
+
+test:
+    name: 【前置条件】准备【发布中】状态会议数据
+    testcase: api/create_meeting.yml
+    output:
+        - ongoing_meeting_id
+        - ongoing_metting_name
+test:
+    name: 【查看会议列表】
+        testcase: api/get.yml
+    validate:
+        - eq: ["content.creator_id", 10013]
+
+
+
