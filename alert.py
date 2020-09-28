@@ -2,9 +2,9 @@ import requests
 import json, subprocess
 import os
 
-access_token = 'd54fd978ea84b3e43654bdff63e63213d8ba24c70eaaee013cacfcb5071d37d8'
-project_name = '会议系统meeting'
-tag = 'p0001-meeting'
+access_token = 'xxxxxxxx'
+project_name = 'xxxx'
+tag = 'xxxxx'
 absdir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -28,8 +28,8 @@ class DataInteg:
                 file_lst.append(filename)
                 dir_name = filename.split('T')[0]
                 command_lst = []
-                command_lst.append("ssh runner@123.56.165.90 mkdir -p /files/data/zwinstall/{}/{}".format(tag, dir_name))
-                command_lst.append("scp reports/{} runner@123.56.165.90:{}".format(filename, '/files/data/zwinstall/{}/{}'.format(tag, dir_name)))
+                command_lst.append("ssh runner@xxxxx mkdir -p /files/data/zwinstall/{}/{}".format(tag, dir_name))
+                command_lst.append("scp reports/{} xxxx@xxxx:{}".format(filename, '/files/data/zwinstall/{}/{}'.format(tag, dir_name)))
                 ConnRemoteHost().toHost(command_lst)
 
         SendAlert().send_alert(file_lst, summary)
@@ -37,23 +37,11 @@ class DataInteg:
 class SendAlert:
     
     def send_alert(self, file_lst, summary):
-        base_url = 'https://zwinstall.gugud.com/{}/'.format(tag)
+        base_url = 'https://zxxxll.xxxxx.com/{}/'.format(tag)
         report_url = ''
         for x in file_lst:
             report_url = base_url + x.split('T')[0] + '/' + x + "   " + report_url
         headers = {'Content-Type': 'application/json;charset=utf-8'}
-
-        # send_data = {
-        #     "msgtype": "markdown",
-        #     "markdown": {
-        #         "title": "会议系统",
-        #         "text": "#### API自动化测试【"+Util.result_str(summary['success'])+"】 \n" +
-        #             "> 项目名: {}\n\n".format(project_name) +
-        #             "> 接口访问地址: {}\n\n".format(os.getenv('API_URL')) + 
-        #             "> 接口仓库地址: {}\n\n".format(os.getenv('CI_PROJECT_URL')) +
-        #             "> 测试报告地址: {}\n\n".format(report_url)
-        #     }
-        # }
         send_data = {
             "msgtype": "text",
             "text": {
